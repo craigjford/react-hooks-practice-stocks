@@ -1,28 +1,24 @@
 import React from "react";
-import Stock from "./Stock";
+import Stock from "./Stock";  
 
-function StockContainer({ stocks, handleStockClick }) {
-  console.log('in StockContainer = ', stocks)
+function StockContainer({ srce, stocks, handleStockContClick }) {
 
-  const stockList = stocks.map((stock) => {
-            return (<Stock key={stock.id} name={stock.name} ticker={stock.ticker} price={stock.price} onClick={handleClick} />)   
-  })
+  console.log('****   in StockContainer = ', stocks);
 
-  function handleClick(event) {
-    console.log('onhandleClick evt = ', event.target.id)
- }
+  function handleStockClick(srce, type, name, ticker, price) {
+      console.log('Stock Container handleStockClick srce = ', srce, name);
+      handleStockContClick(srce, type, name, ticker, price);
+  }
 
-  //console.log('in StockContainer after mapping - stockList = ', stockList)
   return (
     <div>
       <h2>Stocks</h2>
-      {stockList}
+        {stocks.map((stock) => (
+            <Stock key={stock.id} srce={"stocks"} type={stock.type} name={stock.name} ticker={stock.ticker} price={stock.price} onStockClick={handleStockClick} />
+        ))}
     </div>
   );
 }
 
 export default StockContainer;
 
-/*----------------------------------------------------------------
- onClick={handddClick}
- */

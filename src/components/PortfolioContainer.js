@@ -1,14 +1,19 @@
 import React from "react";
 import Stock from "./Stock";
 
-function PortfolioContainer({ profileStocks }) {
-  console.log('in Portfolio Container = ', profileStocks)
+function PortfolioContainer({ srce, profileStocks, handleProfContClick }) {
 
-  const portfolioList = profileStocks.map((stock) => {
-            return (<Stock key={stock.id} name={stock.name} ticker={stock.ticker} price={stock.price} />);   
-  })
+  console.log('****   in PortContainer = ', profileStocks);
 
-  console.log('in Portfolio Container after mapping - stockList = ', portfolioList)
+  function handleProfClick(srce, type, name, ticker, price) {
+      console.log('Portfolio Container handleStockClick type = ', srce, name);
+      handleProfContClick(srce, type, name, ticker, price);
+  }
+
+  //const portfolioList = profileStocks.map((stock) => {
+  //          return (<Stock key={stock.id} name={stock.name} ticker={stock.ticker} price={stock.price} />);   
+  //})
+
 
   return (
     <div>
@@ -16,7 +21,10 @@ function PortfolioContainer({ profileStocks }) {
       {
         //render your portfolio stocks here
       }
-      {portfolioList}
+      {profileStocks.map((stock) => (
+            <Stock key={stock.id} srce={"profile"} type={stock.type} name={stock.name} ticker={stock.ticker} price={stock.price} onStockClick={handleProfClick} />
+      ))}
+
     </div>
   );
 }
