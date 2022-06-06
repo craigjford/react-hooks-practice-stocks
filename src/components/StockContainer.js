@@ -3,19 +3,18 @@ import Stock from "./Stock";
 
 function StockContainer({ srce, stocks, handleStockContClick }) {
 
-  console.log('****   in StockContainer = ', stocks);
-
-  function handleStockClick(srce, type, name, ticker, price) {
-      console.log('Stock Container handleStockClick srce = ', srce, name);
+  const handleStockClick = (srce, type, name, ticker, price) => {
       handleStockContClick(srce, type, name, ticker, price);
   }
+  const stockList = stocks.map((stock) => (
+    <Stock key={stock.id} srce={"stocks"} type={stock.type} name={stock.name} ticker={stock.ticker} price={stock.price} onStockClick={handleStockClick} />
+))
 
   return (
     <div>
+      {console.log('****   in StockContainer = ', stocks)}
       <h2>Stocks</h2>
-        {stocks.map((stock) => (
-            <Stock key={stock.id} srce={"stocks"} type={stock.type} name={stock.name} ticker={stock.ticker} price={stock.price} onStockClick={handleStockClick} />
-        ))}
+        {stockList}
     </div>
   );
 }
